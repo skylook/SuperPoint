@@ -70,6 +70,8 @@ class SyntheticShapes(BaseDataset):
     def dump_primitive_data(self, primitive, tar_path, config):
         temp_dir = Path(os.environ['TMPDIR'], primitive)
 
+        tf.logging.info('Generating tarfile for tar_path {}.'.format(tar_path))
+
         tf.logging.info('Generating tarfile for primitive {}.'.format(primitive))
         synthetic_dataset.set_random_state(np.random.RandomState(
                 config['generation']['random_seed']))
@@ -97,10 +99,10 @@ class SyntheticShapes(BaseDataset):
                 np.save(Path(pts_dir, '{}.npy'.format(i)), points)
 
         # Pack into a tar file
-        tar = tarfile.open(tar_path, mode='w:gz')
-        tar.add(temp_dir, arcname=primitive)
+        tar = tarfile.open(str(tar_path), mode='w:gz')
+        tar.add(str(temp_dir), arcname=primitive)
         tar.close()
-        shutil.rmtree(temp_dir)
+        shutil.rmtree(str(temp_dir))
         tf.logging.info('Tarfile dumped to {}.'.format(tar_path))
 
     def _init_dataset(self, **config):
@@ -127,9 +129,10 @@ class SyntheticShapes(BaseDataset):
 
             # Untar locally
             tf.logging.info('Extracting archive for primitive {}.'.format(primitive))
-            tar = tarfile.open(tar_path)
+            tf.logging.info('Extracting archive {}.'.format(tar_path))
+            tar = tarfile.open(str(tar_path))
             temp_dir = Path(os.environ['TMPDIR'])
-            tar.extractall(path=temp_dir)
+            tar.extractall(path=str(temp_dir))
             tar.close()
 
             # Gather filenames in all splits, optionally truncate
