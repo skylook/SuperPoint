@@ -27,7 +27,7 @@ if __name__ == '__main__':
 
     output_dir = Path(EXPER_PATH, 'outputs/{}/'.format(export_name))
     if not output_dir.exists():
-        os.makedirs(output_dir)
+        os.makedirs(str(output_dir))
     checkpoint = Path(EXPER_PATH, experiment_name)
     if 'checkpoint' in config:
         checkpoint = Path(checkpoint, config['checkpoint'])
