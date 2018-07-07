@@ -71,7 +71,7 @@ if __name__ == '__main__':
                     p.update(d)  # Can't get the data back from the filename --> dump
                 filename = d['name'].decode('utf-8') if 'name' in d else str(i)
                 filepath = Path(output_dir, '{}.npz'.format(filename))
-                np.savez_compressed(filepath, **p)
+                np.savez_compressed(str(filepath), **p)
                 i += 1
                 pbar.update(1)
 

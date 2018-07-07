@@ -1,6 +1,6 @@
 data:
     name: 'coco'
-    labels: null # Complete with your export labels
+    labels: 'outputs/magic-point_coco-export1' # Complete with your export labels
     cache_in_memory: false
     validation_size: 192
     augmentation:

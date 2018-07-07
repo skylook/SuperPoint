@@ -202,7 +202,9 @@ def sample_homography(
     a_mat = tf.stack([f(pts1[i], pts2[i]) for i in range(4) for f in (ax, ay)], axis=0)
     p_mat = tf.transpose(tf.stack(
         [[pts2[i][j] for i in range(4) for j in range(2)]], axis=0))
-    homography = tf.transpose(tf.matrix_solve_ls(a_mat, p_mat, fast=True))
+    print("a_mat = {}".format(a_mat))
+    print("p_mat = {}".format(p_mat))
+    homography = tf.transpose(tf.matrix_solve_ls(a_mat, p_mat, fast=False))
     return homography
 
 
