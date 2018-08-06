@@ -17,6 +17,8 @@ if __name__ == '__main__':
     parser.add_argument('--export_name', type=str, default=None)
     args = parser.parse_args()
 
+    print("Here!")
+
     experiment_name = args.experiment_name
     export_name = args.export_name if args.export_name else experiment_name
     with open(args.config, 'r') as f:
@@ -30,10 +32,14 @@ if __name__ == '__main__':
     if 'checkpoint' in config:
         checkpoint = Path(checkpoint, config['checkpoint'])
 
+        print("Here! 3")
+
     with experiment._init_graph(config, with_dataset=True) as (net, dataset):
         if net.trainable:
             net.load(str(checkpoint))
         test_set = dataset.get_test_set()
+
+        print("Here!")
 
         pbar = tqdm(total=config['eval_iter'] if config['eval_iter'] > 0 else None)
         i = 0

@@ -18,7 +18,7 @@ class SuperPoint(BaseModel):
             'batch_size': 32,
             'learning_rate': 0.001,
             'lambda_d': 250,
-            'descriptor_size': 256,
+            # 'descriptor_size': 256,
             'positive_margin': 1,
             'negative_margin': 0.2,
             'lambda_loss': 0.0001,
